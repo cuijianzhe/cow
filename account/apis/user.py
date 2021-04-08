@@ -13,3 +13,43 @@ class LoginApi(BaseApi):
     def post(self, request, params):
         data = user_ctl.login(**params)
         return data
+
+
+
+
+class UserApi(BaseApi):
+    NEED_PERMISSION = False
+
+    need_params = {
+        'obj_id': ('用户ID', 'required int'),
+    }
+
+    def post(self, request, params):
+        data = user_ctl.get_users(**params)
+        return data
+
+
+class CreateUserApi(BaseApi):
+    need_params = {
+        'username': ('用户名', 'required str 32'),
+        'password': ('密码', 'optional str 32'),
+        'name': ('姓名', 'required str 32'),
+        'phone': ('手机号', 'optional str 32'),
+        'email': ('邮箱', 'required str 128'),
+    }
+    def post(self, request, params):
+        data = user_ctl.create_user(**params)
+        return data
+
+class ListUserApi(BaseApi):
+    NEED_LOGIN = False
+    NEED_PERMISSION = False
+
+    need_params = {
+        'keyword': ('关键词', 'optional str 16'),
+        'page_num': ('页码', 'optional int'),
+        'page_size': ('页容量', 'optional int'),
+    }
+    def post(self, request, params):
+        data = user_ctl.get_users(**params)
+        return data
