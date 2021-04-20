@@ -15,8 +15,6 @@ class LoginApi(BaseApi):
         return data
 
 
-
-
 class UserApi(BaseApi):
     NEED_PERMISSION = False
 
@@ -30,6 +28,7 @@ class UserApi(BaseApi):
 
 
 class CreateUserApi(BaseApi):
+    NEED_LOGIN = False
     need_params = {
         'username': ('用户名', 'required str 32'),
         'password': ('密码', 'optional str 32'),
@@ -53,3 +52,12 @@ class ListUserApi(BaseApi):
     def post(self, request, params):
         data = user_ctl.get_users(**params)
         return data
+
+class DeleteUserApi(BaseApi):
+    NEED_LOGIN = False
+    need_params = {
+        'obj_id':('用户ID','required int')
+    }
+    def post(self,request,params):
+        user_ctl.delete_user(**params)
+

@@ -47,8 +47,6 @@ def create_user(username, password, name=None, phone=None, email=None, operator=
     data = user_obj.to_dict()
     return data
 
-
-
 def get_users(keyword=None, page_num=None, page_size=None, operator=None):
     '''
     获取用户列表
@@ -67,3 +65,18 @@ def get_users(keyword=None, page_num=None, page_size=None, operator=None):
         'data_list': data_list,
     }
     return data
+
+def delete_user(obj_id,operator=None):
+    obj = base_ctl.get_obj(UserModel,obj_id)
+    if is_admin(obj):
+        raise errors.CommonError('超级管理员用户不允许删除')
+    with transaction.atomic():
+        base_ctl.delete_obj(UserModel,obj_id,operator)
+
+def is_admin(user_obj):
+    '''
+    判断用户是否是超级用户
+    '''
+    if user_obj.typ == UserModel.TYP_NORMAL and user_obj.username == 'admin':
+        return True
+    return False
