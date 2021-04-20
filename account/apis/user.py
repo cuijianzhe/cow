@@ -54,6 +54,12 @@ class ListUserApi(BaseApi):
         return data
 
 class DeleteUserApi(BaseApi):
+    '''
+    http://192.168.51.207:10080/api/v1/account/user/delete/
+    {
+    "obj_id": "6"
+    }
+    '''
     NEED_LOGIN = False
     need_params = {
         'obj_id':('用户ID','required int')
