@@ -12,3 +12,14 @@
 |      R.shuffle(seq[, random])      |     随机指定序列的顺序(乱序序列）      |
 |         R.sample(seq,n)	         |   从序列中选择n个随机且不重复的元素    |
 |                                    |                                    |
+
+
+
+#### 登录接口
+
+![](images/userlist.png)
+
+#### 创建业务线
+
+![](images/create_department.png)
+
