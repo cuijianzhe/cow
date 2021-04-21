@@ -15,7 +15,7 @@
 
 
 
-#### 登录接口
+#### 获取人员列表接口
 
 ![](images/userlist.png)
 
@@ -23,3 +23,6 @@
 
 ![](images/create_department.png)
 
+#### 获取部门列表
+
+![](images/get_departmentList.png)

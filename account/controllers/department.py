@@ -18,5 +18,18 @@ def create_department(name,sign,operator=None):
     data = obj.to_dict()
     return data
 
-
+def get_department(keyword=None, page_num=None, page_size=None, operator=None):
+    base_query = DepartmentModel.objects
+    if keyword:
+        base_query = base_query.filter(Q(name__icontains=keyword)|
+                                       Q(sign__icontains=keyword))
+        # icontains 忽略大小写  contains 大小写 icontains是表示模糊匹配, 主要还有个 contains，两者区别是是否区分大小写
+        total = base_query.count()
+        objs = base_ctl.query_objs_by_page(base_query, page_num, page_size)
+        data_list = [obj.to_dict() for obj in objs]
+        data = {
+            'total':total,
+            'data_list':data_list
+        }
+        return data
 

@@ -10,3 +10,14 @@ class CreateDepartmentApi(BaseApi):
     def post(self,request,params):
         department_ctl.create_department(**params)
 
+class ListDepartmentApi(BaseApi):
+    NEED_LOGIN = False
+    need_params = {
+        'keyword': ('关键词', 'optional str 32'),
+        'page_num': ('页码', 'optional int'),
+        'page_size': ('页容量', 'optional int'),
+    }
+    def get(self,request,params):
+        data = department_ctl.get_department(**params)
+        return data
+
