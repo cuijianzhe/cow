@@ -30,3 +30,7 @@
 #### 删除部门属性
 
 ![](images/delete_department.png)
+
+#### 编辑部门属性
+
+![](images/update_department.png)

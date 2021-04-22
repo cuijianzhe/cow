@@ -18,7 +18,7 @@ class ListDepartmentApi(BaseApi):
         'page_size': ('页容量', 'optional int'),
     }
     def get(self,request,params):
-        data = department_ctl.get_department(**params)
+        data = department_ctl.get_departments(**params)
         return data
 
 class DeleteDepartmentApi(BaseApi):
@@ -28,3 +28,22 @@ class DeleteDepartmentApi(BaseApi):
     }
     def post(self,request,params):
         department_ctl.delete_department(**params)
+
+class DepartmentApi(BaseApi):
+    NEED_LOGIN = False
+    need_params = {
+        'obj_id':('部门ID','required int'),
+    }
+    def get(self,request,params):
+        data = department_ctl.get_department(**params)
+        return data
+
+class UpdateDepartmentApi(BaseApi):
+    NEED_LOGIN = False
+    need_params = {
+        'obj_id': ('部门ID', 'required int'),
+        'name':('部门名称','required str 32'),
+        'sign':('部门标识','required str 32'),
+    }
+    def post(self,request,params):
+        department_ctl.update_department(**params)

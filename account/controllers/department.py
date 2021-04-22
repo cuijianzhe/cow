@@ -18,7 +18,7 @@ def create_department(name,sign,operator=None):
     data = obj.to_dict()
     return data
 
-def get_department(keyword=None, page_num=None, page_size=None, operator=None):
+def get_departments(keyword=None, page_num=None, page_size=None, operator=None):
     base_query = DepartmentModel.objects
     if keyword:
         base_query = base_query.filter(Q(name__icontains=keyword)|
@@ -36,4 +36,24 @@ def get_department(keyword=None, page_num=None, page_size=None, operator=None):
 def delete_department(obj_id,operator=None):
 
     obj = base_ctl.get_obj(DepartmentModel,obj_id)
-    base_ctl.delete_obj(DepartmentModel,obj_id,operator)
+    if obj:
+        base_ctl.delete_obj(DepartmentModel,obj_id,operator)
+
+def get_department(obj_id,operator=None):
+    obj = base_ctl.get_obj(DepartmentModel,obj_id)
+    data = obj.to_dict()
+    return data
+
+def update_department(obj_id,name=None,sign=None,operator=None):
+    if DepartmentModel.objects.filter(name=name).exclude(id=obj_id).exists():
+        raise errors.CommonError('部门名称已存在')
+    if DepartmentModel.objects.filter(sign=sign).exclude(id=obj_id).exists():
+        raise errors.CommonError('部门标识已存在')
+    obj = base_ctl.get_obj(DepartmentModel,obj_id)
+    data = {
+        'name':name,
+        'sign':sign,
+    }
+    obj = base_ctl.update_obj(DepartmentModel,obj_id,data,operator)
+    data = obj.to_dict()
+    return data
