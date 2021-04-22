@@ -21,3 +21,10 @@ class ListDepartmentApi(BaseApi):
         data = department_ctl.get_department(**params)
         return data
 
+class DeleteDepartmentApi(BaseApi):
+    NEED_LOGIN = False
+    need_params = {
+        "obj_id": ('部门ID','required int'),
+    }
+    def post(self,request,params):
+        department_ctl.delete_department(**params)

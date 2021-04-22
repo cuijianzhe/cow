@@ -26,3 +26,7 @@
 #### 获取部门列表
 
 ![](images/get_departmentList.png)
+
+#### 删除部门属性
+
+![](images/delete_department.png)

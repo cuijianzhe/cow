@@ -33,3 +33,7 @@ def get_department(keyword=None, page_num=None, page_size=None, operator=None):
         }
         return data
 
+def delete_department(obj_id,operator=None):
+
+    obj = base_ctl.get_obj(DepartmentModel,obj_id)
+    base_ctl.delete_obj(DepartmentModel,obj_id,operator)
