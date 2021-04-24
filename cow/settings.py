@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'cow.wsgi.application'
 
 MYSQL_HOST = '192.168.51.207'
 MYSQL_PORT = 3306
-MYSQL_NAME = 'cattle'
+MYSQL_NAME = 'cuijianzhe'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = 'qwe*123456'
 

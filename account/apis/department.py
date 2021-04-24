@@ -47,3 +47,13 @@ class UpdateDepartmentApi(BaseApi):
     }
     def post(self,request,params):
         department_ctl.update_department(**params)
+
+class CreateDepartmentUserApi(BaseApi):
+    NEED_LOGIN = False
+    need_params = {
+        'user_id': ('用户ID', 'required int'),
+        'department_id': ('部门ID', 'required int'),
+        'typ': ('类型', 'required int'),
+    }
+    def post(self, request, params):
+        department_ctl.create_department_user(**params)

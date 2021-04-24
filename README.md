@@ -34,3 +34,7 @@
 #### 编辑部门属性
 
 ![](images/update_department.png)
+
+#### 部门关联用户
+
+![](images/create_department_user.png)

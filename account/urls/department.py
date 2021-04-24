@@ -8,4 +8,5 @@ urlpatterns = [
     path('department/delete/', department_api.DeleteDepartmentApi.as_view()),
     path('department/', department_api.DepartmentApi.as_view()),
     path('department/update/', department_api.UpdateDepartmentApi.as_view()),
+    path('department/user/create/', department_api.CreateDepartmentUserApi.as_view()),
 ]

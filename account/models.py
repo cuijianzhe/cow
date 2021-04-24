@@ -108,6 +108,9 @@ class DepartmentUserModel(BaseModel):
     '''
     部门与用户
     '''
+    model_name = '部门关联用户'
+    model_sign = 'department_user'
+
     TYP_MANAGER = 10
     TYP_MEMBER = 20
     TYP_CHOICES = (

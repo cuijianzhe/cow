@@ -57,3 +57,24 @@ def update_department(obj_id,name=None,sign=None,operator=None):
     obj = base_ctl.update_obj(DepartmentModel,obj_id,data,operator)
     data = obj.to_dict()
     return data
+
+def create_department_user(department_id, user_id, typ, operator=None):
+    '''
+    创建部门关联用户
+    '''
+    query = {
+        'user_id': user_id,
+        'department_id': department_id,
+    }
+    if DepartmentUserModel.objects.filter(**query).exists():
+        raise errors.CommonError('用户已在此部门中')
+    if not DepartmentUserModel.check_choices('typ', typ):
+        raise errors.CommonError('类型值不正确')
+    data = {
+        'user_id': user_id,
+        'department_id': department_id,
+        'typ': typ,
+    }
+    obj = base_ctl.create_obj(DepartmentUserModel, data, operator)
+    data = obj.to_dict()
+    return data
