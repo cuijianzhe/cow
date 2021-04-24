@@ -3,8 +3,6 @@ from account.controllers import user as user_ctl
 
 
 class LoginApi(BaseApi):
-    NEED_LOGIN = False
-
     need_params = {
         'username': ('用户名', 'required str 32'),
         'password': ('密码', 'required str 32'),
@@ -28,7 +26,6 @@ class UserApi(BaseApi):
 
 
 class CreateUserApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'username': ('用户名', 'required str 32'),
         'password': ('密码', 'optional str 32'),
@@ -41,7 +38,6 @@ class CreateUserApi(BaseApi):
         return data
 
 class ListUserApi(BaseApi):
-    NEED_LOGIN = False
     NEED_PERMISSION = False
 
     need_params = {
@@ -60,7 +56,6 @@ class DeleteUserApi(BaseApi):
     "obj_id": "6"
     }
     '''
-    NEED_LOGIN = False
     need_params = {
         'obj_id':('用户ID','required int')
     }
@@ -68,7 +63,6 @@ class DeleteUserApi(BaseApi):
         user_ctl.delete_user(**params)
 
 class UpdateUserApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'obj_id': ('用户ID', 'required int'),
         'password': ('密码', 'optional str 32'),

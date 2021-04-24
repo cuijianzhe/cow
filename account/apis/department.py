@@ -2,7 +2,6 @@ from base.api import BaseApi
 from account.controllers import department as department_ctl
 
 class CreateDepartmentApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'name': ('名称','required str 16'),
         'sign': ('标识','required str 32'),
@@ -11,7 +10,6 @@ class CreateDepartmentApi(BaseApi):
         department_ctl.create_department(**params)
 
 class ListDepartmentApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'keyword': ('关键词', 'optional str 32'),
         'page_num': ('页码', 'optional int'),
@@ -22,7 +20,6 @@ class ListDepartmentApi(BaseApi):
         return data
 
 class DeleteDepartmentApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         "obj_id": ('部门ID','required int'),
     }
@@ -30,7 +27,6 @@ class DeleteDepartmentApi(BaseApi):
         department_ctl.delete_department(**params)
 
 class DepartmentApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'obj_id':('部门ID','required int'),
     }
@@ -39,7 +35,6 @@ class DepartmentApi(BaseApi):
         return data
 
 class UpdateDepartmentApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'obj_id': ('部门ID', 'required int'),
         'name':('部门名称','required str 32'),
@@ -49,7 +44,6 @@ class UpdateDepartmentApi(BaseApi):
         department_ctl.update_department(**params)
 
 class CreateDepartmentUserApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'user_id': ('用户ID', 'required int'),
         'department_id': ('部门ID', 'required int'),
@@ -59,7 +53,6 @@ class CreateDepartmentUserApi(BaseApi):
         department_ctl.create_department_user(**params)
 
 class UpdateDepartmentUserApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'user_id': ('用户ID', 'required int'),
         'department_id': ('部门ID', 'required int'),
@@ -69,7 +62,6 @@ class UpdateDepartmentUserApi(BaseApi):
         department_ctl.Update_department_user(**params)
 
 class DeleteDepartmentUserApi(BaseApi):
-    NEED_LOGIN = False
     need_params = {
         'user_id':('用户ID','required int'),
         'department_id':('部门ID','required int'),
