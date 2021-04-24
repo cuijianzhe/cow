@@ -38,3 +38,11 @@
 #### 部门关联用户
 
 ![](images/create_department_user.png)
+
+#### 删除部门用户
+
+![](images/delete_department_user.png)
+
+#### 获取部门用户列表
+
+![](images/list_department_user.png)

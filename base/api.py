@@ -11,7 +11,7 @@ from utils import time_utils
 
 
 class BaseApi(View):
-    NEED_LOGIN = True
+    NEED_LOGIN = False #方便调试这里暂时改成全局不登录
     NEED_PERMISSION = True
     need_params = {}
 
