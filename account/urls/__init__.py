@@ -2,5 +2,7 @@
 
 from account.urls import user
 from account.urls import department
+from account.urls import role
 urlpatterns = user.urlpatterns + \
-    department.urlpatterns
+    department.urlpatterns + \
+    role.urlpatterns

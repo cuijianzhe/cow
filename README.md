@@ -46,3 +46,22 @@
 #### 获取部门用户列表
 
 ![](images/list_department_user.png)
+
+#### 创建role
+
+![](images/create_role.png)
+
+#### 删除role
+
+![](images/delete_role.png)
+
+#### 更新role
+
+
+
+![](images/update_role.png)
+
+#### 获取role列表
+
+![](images/list_role.png)
+

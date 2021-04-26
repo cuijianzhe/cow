@@ -68,6 +68,9 @@ class RoleModel(BaseModel):
     '''
     角色表
     '''
+    model_name = '角色'
+    model_sign = 'role'
+
     TYP_SYSTEM = 10
     TYP_NORMAL = 20
     TYP_CHOICES = (
@@ -75,8 +78,9 @@ class RoleModel(BaseModel):
         (TYP_NORMAL, '普通角色'),
     )
 
-    name = models.CharField('角色名', max_length=128)
+    name = models.CharField('角色名', max_length=32)
     typ = models.IntegerField('类型', choices=TYP_CHOICES, default=TYP_NORMAL)
+    sign = models.CharField('标识', max_length=32)
 
     class Meta:
         db_table = 'role'
@@ -86,6 +90,9 @@ class RoleUserModel(BaseModel):
     '''
     角色用户关系表
     '''
+    model_name = '角色关联用户'
+    model_sign = 'role_user'
+
     role = models.ForeignKey(RoleModel, on_delete=models.CASCADE)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 
