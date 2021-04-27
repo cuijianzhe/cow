@@ -65,3 +65,6 @@
 
 ![](images/list_role.png)
 
+#### 获取用户关联角色列表
+
+![](images/get_role_user.png)

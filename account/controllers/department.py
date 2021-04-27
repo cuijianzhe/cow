@@ -125,4 +125,5 @@ def get_department_user(obj_id, typ=None, page_num=None, page_size=None, operato
         'total':total,
         'data_list':data_list,
     }
+
     return data
