@@ -3,6 +3,11 @@
 from account.urls import user
 from account.urls import department
 from account.urls import role
+from account.urls import mod
+from account.urls import permissions
 urlpatterns = user.urlpatterns + \
     department.urlpatterns + \
-    role.urlpatterns
+    role.urlpatterns + \
+    mod.urlpatterns + \
+    permissions.urlpatterns
+

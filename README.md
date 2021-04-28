@@ -68,3 +68,15 @@
 #### 获取用户关联角色列表
 
 ![](images/get_role_user.png)
+
+#### 更新权限信息
+
+![](images/update_permissions.png)
+
+#### 获取权限列表
+
+![](images/get_permissions.png)
+
+#### 获取模块列表
+
+![](images/get_mods.png)
