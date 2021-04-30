@@ -2,6 +2,9 @@ from base.api import BaseApi
 from account.controllers import role as role_ctl
 
 class CreateRoleApi(BaseApi):
+    '''
+    创建角色
+    '''
     need_params = {
         'name':('名称','required str 32'),
         'sign':('标识','required str 32')
@@ -10,6 +13,9 @@ class CreateRoleApi(BaseApi):
         role_ctl.create_role(**params)
 
 class DeleteRoleApi(BaseApi):
+    '''
+    删除角色
+    '''
     need_params = {
         'obj_id':('角色ID','required int')
     }
@@ -17,6 +23,9 @@ class DeleteRoleApi(BaseApi):
         role_ctl.delete_role(**params)
 
 class UpdataRoleApi(BaseApi):
+    '''
+    更新角色
+    '''
     need_params = {
         'obj_id':('角色ID','required int'),
         'name':('名称','required str 32'),
@@ -45,6 +54,9 @@ def get_role(obj_id, operator=None):
     return data
 
 class CreateRoleUserApi(BaseApi):
+    '''
+    创建角色关联用户
+    '''
     need_params = {
         'user_id':('用户ID','required int'),
         'role_id':('角色ID','required int'),
@@ -53,6 +65,9 @@ class CreateRoleUserApi(BaseApi):
         role_ctl.create_role_user(**params)
 
 class DeleteRoleUserApi(BaseApi):
+    '''
+    删除角色关联用户
+    '''
     need_params = {
         'user_id':('用户ID','required int'),
         'role_id':('角色ID','required int'),
@@ -61,6 +76,9 @@ class DeleteRoleUserApi(BaseApi):
         role_ctl.delete_role_user(**params)
 
 class ListRoleUserApi(BaseApi):
+    '''
+    获取角色用户列表
+    '''
     need_params = {
        'obj_id':('角色ID','required int'),
        'page_num':('页码','optional int'),
@@ -69,3 +87,16 @@ class ListRoleUserApi(BaseApi):
     def get(self,request,params):
         data = role_ctl.get_role_user(**params)
         return data
+
+class SetRoleModApi(BaseApi):
+    '''
+    status: create/delete，代表创建或删除
+    '''
+
+    need_params = {
+        'obj_id': ('角色ID', 'required int'),
+        'mod_id': ('模块ID', 'required int'),
+        'status': ('状态', 'required str'),
+    }
+    def post(self, request, params):
+        role_ctl.set_role_mod(**params)

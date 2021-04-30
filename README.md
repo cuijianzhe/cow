@@ -80,3 +80,7 @@
 #### 获取模块列表
 
 ![](images/get_mods.png)
+
+#### 设置角色模块关联
+
+![](images/set_role_mod.png)

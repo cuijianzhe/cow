@@ -4,7 +4,7 @@ from django.db.models import Q
 from base import errors
 from base import controllers as base_ctl
 from account.models import UserModel
-
+from account.controllers import role as role_ctl
 
 def login(username, password, is_ldap=False):
     '''
@@ -101,3 +101,35 @@ def update_user(obj_id,name=None,password=None,phone=None,email=None,operator=No
             user_obj.set_password(password)
         data = user_obj.to_dict()
         return data
+
+def get_user(obj_id,operator=None):
+    '''
+    获取用户信息
+    '''
+    obj = base_ctl.get_obj(UserModel,obj_id)
+    data = obj.to_dict()
+    return data
+
+def get_user_info(obj_id,operator=None):
+    '''
+    获取用户详情
+    '''
+    user_data = get_user(obj_id)
+    if user_data.get('username') == 'admin':
+        mods = ['mod', 'department', 'role', 'user', 'aliyun_key', 'asset', 'region', 'environment',
+                'berry_type', 'gitlab_server', 'language', 'jenkins_server', 'ldap']
+        permissions = ['admin']
+    else:
+        mod_objs = role_ctl.get_mods_by_user_id(obj_id)
+        mods = [obj.sign for obj in mod_objs]
+        permission_objs = role_ctl.get_permissions_by_user_id(obj_id)
+        permissions = [obj.sign for obj in permission_objs]
+
+    data = {
+        'user':user_data,
+        'mod':mods,
+        'permissions':permissions,
+    }
+    return data
+
+

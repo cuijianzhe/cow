@@ -10,5 +10,6 @@ urlpatterns = [
     path('role/user/create/', role_api.CreateRoleUserApi.as_view()),
     path('role/user/delete/', role_api.DeleteRoleUserApi.as_view()),
     path('role/user/list/', role_api.ListRoleUserApi.as_view()),
+    path('role/mod/set/', role_api.SetRoleModApi.as_view()),
 
 ]

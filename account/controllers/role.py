@@ -5,6 +5,7 @@ from base import errors
 from base import controllers as base_ctl
 from account.models import RoleModel
 from account.models import RoleUserModel
+from account.models import RoleModModel,RolePermissionModel
 
 def create_role(name,sign,operator=None):
     obj = RoleModel.objects.filter(name=name).first()
@@ -89,6 +90,7 @@ def create_role_user(role_id,user_id,operator=None):
     obj = base_ctl.create_obj(RoleUserModel,data,operator)
     data = obj.to_dict()
     return data
+
 def delete_role_user(role_id,user_id,operator=None):
     '''
     删除角色关联用户
@@ -101,6 +103,7 @@ def delete_role_user(role_id,user_id,operator=None):
     if not obj:
         raise errors.CommonError('用户未关联此角色')
     base_ctl.delete_obj(RoleUserModel,obj.id,operator)
+
 
 def get_role_user(obj_id, page_num=None, page_size=None, operator=None):
     '''
@@ -120,3 +123,97 @@ def get_role_user(obj_id, page_num=None, page_size=None, operator=None):
         'data_list':data_list,
     }
     return data
+
+def create_role_mod(role_id,mod_id,operator):
+    '''
+    创建角色关联模块
+    '''
+    query = {
+        'role_id':role_id,
+        'mod_id':mod_id,
+    }
+    if RoleModModel.objects.filter(**query).exists():
+        raise errors.CommonError('此角色已关联此模块')
+    data = query
+    obj = base_ctl.create_obj(RoleModModel,data,operator)
+    data = obj.to_dict()
+    return data
+
+def delete_role_mod(role_id,mod_id,perator):
+    '''
+    删除角色关联模块
+    '''
+    query = {
+        'role_id':role_id,
+        'mod_id':mod_id,
+    }
+    obj = RoleModModel.objects.filter(**query).first()
+    if not obj:
+        raise errors.CommonError('角色未关联此模块')
+    with transaction.atomic():
+        base_ctl.delete_obj(RoleModModel,obj.id,operator)
+        query = {
+            'role_id':role_id,
+            'permission_mod_id':mod_id,
+        }
+        batch_ids = RolePermissionModel.objects.filter(**query).value_list('id',flat=True).all()
+        if batch_ids:
+            base_ctl.delete_objs(RolePermissionModel,list(set(batch_ids)))
+
+
+def get_role_mods(obj_id,page_num=None,page_size=None,operator=None):
+    '''
+    获取角色模块列表
+    '''
+    base_query = RoleModModel.objects.filter(role_id=obj_id)\
+            .filter(user__is_deleted=False).select_related('mod')
+    total = base_query.count()
+    objs = base_ctl.query_objs_by_page(base_query,page_size,page_num)
+    data_list = []
+    for obj in objs:
+        data = obj.to_dict()
+        data['mod'] = obj.mod.to_dict()
+        data_list.append(data)
+    data = {
+        'total':total,
+        'data_list':data_list,
+    }
+    return data
+
+def set_role_mod(obj_id,mod_id,status,operator=None):
+    '''
+    设置角色模块
+    '''
+    data = {}
+    if status == 'create':
+        data = create_role_mod(obj_id,mod_id,operator)
+    elif  status == 'delete':
+        data = delete_role_mod(obj_id,mod_id,operator)
+    return data
+
+def get_role_ids_by_user_id(user_id,operator=None):
+    '''
+    根据用户id获取角色列表
+    '''
+    role_ids = RoleUserModel.objects.filter(user_id=user_id) \
+        .value_list('role_id', flat=True).all()
+    return list(set(role_ids))
+
+def get_mods_by_user_id(user_id, operator=None):
+    '''
+    根据user_id获取模块列表
+    '''
+    role_ids = get_role_ids_by_user_id(user_id)
+    mod_ids = RoleModModel.objects.filter(role_id__in=role_ids).values_list('mod_id', flat=True).all()
+    mods = ModModel.objects.filter(id__in=mod_ids).all()
+    return mods
+
+def get_permissions_by_user_id(user_id, operator=None):
+    '''
+    根据user_id获取权限列表
+    '''
+    role_ids = get_role_ids_by_user_id(user_id)
+    permission_ids = RolePermissionModel.objects.filter(role_id__in=role_ids)\
+            .values_list('permission_id', flat=True).all()
+    permissions = PermissionModel.objects.filter(id__in=permission_ids).all()
+    return permissions

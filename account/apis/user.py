@@ -20,8 +20,8 @@ class UserApi(BaseApi):
         'obj_id': ('用户ID', 'required int'),
     }
 
-    def post(self, request, params):
-        data = user_ctl.get_users(**params)
+    def get(self, request, params):
+        data = user_ctl.get_user(**params)
         return data
 
 
@@ -72,4 +72,15 @@ class UpdateUserApi(BaseApi):
     }
     def post(self, request, params):
         user_ctl.update_user(**params)
+
+class CurrentUserApi(BaseApi):
+    NEED_PERMISSION = False
+
+    need_params = {
+        'obj_id':('用户ID','required int')
+    }
+    def get(self, request, params):
+        # params['obj_id'] = request.user_id
+        data = user_ctl.get_user_info(**params)
+        return data
 
