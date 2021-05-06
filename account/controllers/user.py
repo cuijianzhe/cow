@@ -165,3 +165,16 @@ def get_departments_by_user_id(obj_id, operator=None):
         'data_list': data_list,
     }
     return data
+
+def has_permission(user_id, permission):
+    '''
+    判断用户是否有权限
+    '''
+    obj = base_ctl.get_obj(UserModel, user_id)
+    if obj.username == 'admin':
+        return True
+    permission_objs = role_ctl.get_permissions_by_user_id(user_id)
+    permissions = [obj.sign for obj in permission_objs]
+    if permission in permissions:
+        return True
+    return False
