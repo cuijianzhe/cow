@@ -100,3 +100,56 @@ class SetRoleModApi(BaseApi):
     }
     def post(self, request, params):
         role_ctl.set_role_mod(**params)
+
+class ListRoleModApi(BaseApi):
+    '''
+
+    '''
+    NEED_PERMISSION = False
+
+    need_params = {
+        'obj_id': ('角色ID', 'required int'),
+        'page_num': ('页码', 'optional int'),
+        'page_size': ('页容量', 'optional int'),
+    }
+    def get(self, request, params):
+        data = role_ctl.get_role_mods(**params)
+        return data
+
+class SetRolePermissionApi(BaseApi):
+    '''
+    status: create/delete，代表创建或删除
+    '''
+
+    need_params = {
+        'obj_id': ('角色ID', 'required int'),
+        'permission_id': ('权限ID', 'required int'),
+        'status': ('状态', 'required str'),
+    }
+    def post(self, request, params):
+        role_ctl.set_role_permission(**params)
+
+
+class ListRolePermissionApi(BaseApi):
+    NEED_PERMISSION = False
+
+    need_params = {
+        'obj_id': ('角色ID', 'required int'),
+        'page_num': ('页码', 'optional int'),
+        'page_size': ('页容量', 'optional int'),
+    }
+    def get(self, request, params):
+        data = role_ctl.get_role_permissions(**params)
+        return data
+
+
+class RoleModPermissionApi(BaseApi):
+    NEED_PERMISSION = False
+
+    need_params = {
+        'obj_id': ('角色ID', 'required int'),
+    }
+
+    def get(self, request, params):
+        data = role_ctl.get_role_mod_permission(**params)
+        return data

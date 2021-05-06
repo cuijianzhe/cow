@@ -11,5 +11,8 @@ urlpatterns = [
     path('role/user/delete/', role_api.DeleteRoleUserApi.as_view()),
     path('role/user/list/', role_api.ListRoleUserApi.as_view()),
     path('role/mod/set/', role_api.SetRoleModApi.as_view()),
-
+    path('role/mod/list/', role_api.ListRoleModApi.as_view()),
+    path('role/permission/set/', role_api.SetRolePermissionApi.as_view()),
+    path('role/permission/list/', role_api.ListRolePermissionApi.as_view()),
+    path('role/mod/permission/', role_api.RoleModPermissionApi.as_view()),
 ]

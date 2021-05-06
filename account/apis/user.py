@@ -77,10 +77,10 @@ class CurrentUserApi(BaseApi):
     NEED_PERMISSION = False
 
     need_params = {
-        'obj_id':('用户ID','required int')
+
     }
     def get(self, request, params):
-        # params['obj_id'] = request.user_id
+        params['obj_id'] = request.user_id
         data = user_ctl.get_user_info(**params)
         return data
 
