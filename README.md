@@ -84,3 +84,7 @@
 #### 设置角色模块关联
 
 ![](images/set_role_mod.png)
+
+#### 获取用户角色列表
+
+![](images/get_user_role.png)

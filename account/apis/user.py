@@ -84,3 +84,20 @@ class CurrentUserApi(BaseApi):
         data = user_ctl.get_user_info(**params)
         return data
 
+class ListUserRoleApi(BaseApi):
+    need_params = {
+        'obj_id':('用户ID','required int'),
+    }
+    def get(self,request,params):
+        data = user_ctl.get_roles_by_user_id(**params)
+        return data
+
+class ListUserDepartmentApi(BaseApi):
+    NEED_PERMISSION = False
+
+    need_params = {
+        'obj_id': ('用户ID', 'required int'),
+    }
+    def get(self, request, params):
+        data = user_ctl.get_departments_by_user_id(**params)
+        return data
