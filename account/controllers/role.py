@@ -5,7 +5,7 @@ from base import errors
 from base import controllers as base_ctl
 from account.models import RoleModel
 from account.models import RoleUserModel
-from account.models import RoleModModel,RolePermissionModel
+from account.models import RoleModModel,RolePermissionModel,PermissionModel
 
 def create_role(name,sign,operator=None):
     obj = RoleModel.objects.filter(name=name).first()
@@ -215,7 +215,7 @@ def get_permissions_by_user_id(user_id, operator=None):
     role_ids = get_role_ids_by_user_id(user_id)
     permission_ids = RolePermissionModel.objects.filter(role_id__in=role_ids)\
             .values_list('permission_id', flat=True).all()
-    permissions = PermissionModel.objects.filter(id__in=permission_ids).all()
+    permissions =  PermissionModel.objects.filter(id__in=permission_ids).all()
     return permissions
 
 def set_role_permission(obj_id, permission_id, status, operator=None):
