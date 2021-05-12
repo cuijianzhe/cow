@@ -39,6 +39,9 @@ def delete_mod(obj_id,operator=None):
     base_ctl.delete_obj(ModModel,obj_id,operator)
 
 def get_mods(keyword=None,need_permission=False, page_num=None, page_size=None, operator=None):
+    '''
+    获取模块列表
+    '''
     base_query = ModModel.objects
     if keyword:
         base_query = base_query.filter(Q(name__icontains=keyword)|
