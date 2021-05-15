@@ -26,3 +26,14 @@ def get_gitlab_projects(keyword=None,page_num=None,page_size=None,operator=None)
         'data_list':data_list,
     }
     return data
+def sync_gitlab_projects(operator=None):
+    '''
+    同步代码库
+    '''
+    params = {}
+    data = {
+        'name': '同步代码库',
+        'typ': 'sync_gitlab',
+        'params': params,
+    }
+    berry_ctl.create_berry(**data)
