@@ -40,7 +40,8 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 INSTALLED_APPS = [
     'account',
     'business.project',
-    'business.service'
+    'business.service',
+    'component.gitlab',
 
 ]
 
