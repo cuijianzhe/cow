@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from corsheaders.defaults import default_headers
 
@@ -136,3 +136,50 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+
+# 有关celery配置
+from kombu import Exchange, Queue
+# celery configs
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'amqp://wenyang:wenyang@127.0.0.1:5672/cow')
+CELERY_TIMEZONE = 'Asia/Shanghai'
+# 一次在broker中取几个任务
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+
+# 默认不记录结果
+# 需要记录结果的任务，则单独指定ignore_result=False
+# @celery_app.task(bind=True, ignore_result=False)
+# CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'mongodb://localhost:27017/')
+# CELERY_TASK_IGNORE_RESULT = True
+
+CELERY_DEFAULT_QUEUE = 'default'
+CELERY_TASK_QUEUES = (
+    Queue('default', Exchange('default'), routing_key='default', queue_arguments={'x-max-priority': 20}),
+    Queue('low_priority', Exchange('low_priority'), routing_key='low_priority', queue_arguments={'x-max-priority': 10}),
+    Queue('high_priority', Exchange('high_priority'), routing_key='high_priority', queue_arguments={'x-max-priority': 30}),
+)
+
+# 有关优先级队列启动问题
+# celery  -A rurality worker -l info -n worker-hd1 -Q high_priority,default
+# celery  -A rurality worker -l info -n worker-hd2 -Q high_priority,default
+# celery  -A rurality worker -l info -n worker-hl1 -Q high_priority,low_priority
+# 如果启动多个worker可以指定处理的队列，
+# 示例中三个worker都可以处理高优先级队列，两个可以处理default队列，只有一个处理低优先级队列
+
+CELERY_TASK_ROUTES = {
+    'account.tasks.*': {'queue': 'high_priority'},
+    '*': {"queue": 'default'},
+}
+# 除了上面可以不同任务指定不同队列外，在调用时也可以指定
+# hello_task.apply_async(queue='low_priority')
+
+# 定时任务，此命令只需要在一台机器上运行
+# celery -A rurality beat -l info
+CELERY_BEAT_SCHEDULE = {
+    'timer_hello_task': {
+        'task': 'account.tasks.timer_hello_task',
+        'schedule': 10.0,
+    },
+}
