@@ -21,5 +21,6 @@ urlpatterns = [
     path('api/v1/', include({
         path('account/', include('account.urls')),
         path('component/',include('component.urls')),
+        path('asset/',include('asset.urls')),
     }))
 ]

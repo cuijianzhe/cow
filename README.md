@@ -88,3 +88,31 @@
 #### 获取用户角色列表
 
 ![](images/get_user_role.png)
+
+
+
+#### 创建阿里云key
+
+![](images/create_aliyunkey.png)
+
+#### 获取gitlab服务列表
+
+![](images/list_gitlab_server.png)
+
+
+
+### 任务
+
+> 定时任务是通过celery的beat来完成的，这里写了一个示例，每10秒执行一次account.tasks.timer_hello_task.  
+
+------
+> account/tasks.py:  
+> 这里就写了两个demo任务，可以通过以下步骤来尝试.  
+> * 首先确保安装了rabbitmq，并且正确的配置了celery.  
+> * 执行```celery  -A rurality worker -l info -n worker-hd1 -Q high_priority,default```  
+> * 执行```celery -A rurality beat -l info```  
+> * 进入```python manage.py shell```  
+* 执行```from account.tasks import hello_task```
+* 执行```hello_task.delay()```  
+
+> 以上就可以看到任务执行了，并且也可以看到定时那个任务一直在执行.  
