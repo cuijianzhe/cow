@@ -64,3 +64,32 @@ def update_aliyun_key(obj_id, key, secret, operator):
     obj = base_ctl.update_obj(AliyunKeyModel, obj_id, data, operator)
     data = obj.to_dict()
     return data
+
+def set_aliyun_key_status(obj_id,status,operator=None):
+    '''
+    设置阿里云key状态
+    '''
+    if not AliyunKeyModel.check_choices('status',status):
+        raise errors.CommonError('状态值不正确')
+    if status != AliyunKeyModel.ST_ENABLE:
+        raise errors.CommonError('只支持启用操作')
+    obj = base_ctl.get_obj(AliyunKeyModel,obj_id)
+    if obj.status == status:
+        return
+    with transaction.atomic():
+        '''
+        先禁用所有启用状态
+        '''
+        existed_ids = AliyunKeyModel.objects.filter(status=AliyunKeyModel.ST_ENABLE)\
+            .values_list('id',flat=True).all() #values_list方法加个参数flat=True可以获取number的值列表
+        data = {
+            'status':AliyunKeyModel.ST_DISABLE,
+        }
+        base_ctl.update_objs(AliyunKeyModel,existed_ids,data)
+        #然后再启用
+        data = {
+            'status':status,
+        }
+        obj_id = base_ctl.update_obj(AliyunKeyModel,obj_id,data,operator)
+        data = obj_id.to_dict()
+        return data

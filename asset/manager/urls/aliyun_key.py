@@ -8,4 +8,5 @@ urlpatterns = [
     path('aliyun_key/delete/', aliyun_key_api.DeleteAliyunKeyApi.as_view()),
     path('aliyun_key/list/', aliyun_key_api.ListAliyunKeyApi.as_view()),
     path('aliyun_key/update/', aliyun_key_api.UpdateAliyunKeyApi.as_view()),
+    path('aliyun_key/status/set/', aliyun_key_api.SetAliyunKeyStatusApi.as_view()),
 ]

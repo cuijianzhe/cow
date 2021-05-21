@@ -45,3 +45,11 @@ class UpdateAliyunKeyApi(BaseApi):
     }
     def post(self, request, params):
         aliyun_key_ctl.update_aliyun_key(**params)
+
+class SetAliyunKeyStatusApi(BaseApi):
+    need_params = {
+        'obj_id':('阿里云key ID','required int'),
+        'status':('阿里云key状态','required int'),
+    }
+    def post(self,request,params):
+        aliyun_key_ctl.set_aliyun_key_status(**params)
