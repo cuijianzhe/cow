@@ -99,7 +99,9 @@
 
 ![](images/list_gitlab_server.png)
 
+#### 创建资产模块
 
+![](images/asset_create.png)
 
 ### 任务
 
