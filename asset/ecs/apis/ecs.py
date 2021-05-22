@@ -13,3 +13,12 @@ class ListEcsApi(BaseApi):
     def get(self, request, params):
         data = ecs_ctl.get_ecses(**params)
         return data
+
+
+
+class SyncEcsApi(BaseApi):
+
+    need_params = {
+    }
+    def post(self, request, params):
+        ecs_ctl.sync_ecses(**params)

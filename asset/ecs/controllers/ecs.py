@@ -4,7 +4,7 @@ from asset.ecs.models import EcsModel
 from base import controllers as base_ctl
 from base import errors
 from asset.manager.controllers import aliyun_key as aliyun_key_ctl
-
+from scheduler.controllers import berry as berry_ctl
 
 def get_ecses(keyword=None, page_num=None, page_size=None, operator=None):
     '''
@@ -27,3 +27,20 @@ def get_ecses(keyword=None, page_num=None, page_size=None, operator=None):
         'data_list': data_list,
     }
     return data
+
+
+def sync_ecses(operator=None):
+    '''
+    同步ECS
+    '''
+    # 先进行是否存在阿里云Key判断
+    aliyun_key_ctl.get_enabled_aliyun_key()
+
+    params = {}
+    data = {
+        'name': '同步ECS',
+        'typ': 'sync_ecs',
+        'input_params': params,
+        'operator': operator,
+    }
+    berry_ctl.create_berry(**data)

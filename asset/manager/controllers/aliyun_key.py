@@ -93,3 +93,13 @@ def set_aliyun_key_status(obj_id,status,operator=None):
         obj_id = base_ctl.update_obj(AliyunKeyModel,obj_id,data,operator)
         data = obj_id.to_dict()
         return data
+
+
+def get_enabled_aliyun_key():
+    '''
+    获取启用状态的阿里云key
+    '''
+    obj = AliyunKeyModel.objects.filter(status=AliyunKeyModel.ST_ENABLE).first()
+    if not obj:
+        raise errors.CommonError('无可用阿里云key')
+    return obj.key, obj.secret

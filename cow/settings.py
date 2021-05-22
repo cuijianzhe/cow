@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'business.service',
     'component.gitlab',
     'asset.manager',
-    'asset.ecs'
+    'asset.ecs',
+    'scheduler'
 
 ]
 
