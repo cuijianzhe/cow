@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'business.project',
     'business.service',
     'component.gitlab',
-    'asset.manager'
+    'asset.manager',
+    'asset.ecs'
 
 ]
 
