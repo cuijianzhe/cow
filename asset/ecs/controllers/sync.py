@@ -7,7 +7,7 @@ from asset.manager.controllers import aliyun_key as aliyun_key_ctl
 from asset.manager.controllers import region as region_ctl
 from base import controllers as base_ctl
 from base import errors
-from utils.aliyun import AliyunECS
+from utils.aliyun.ecs import AliyunECS
 from utils.time_utils import str2datetime_by_format
 
 
@@ -63,6 +63,7 @@ def sync_ecses():
     '''
     key, secret = aliyun_key_ctl.get_enabled_aliyun_key()
     regions = region_ctl.get_regions(status=RegionModel.ST_ENABLE)['data_list']
+    print(regions)
     # 记录原来已经创建过的ECS，用于之后删除已经不存在的使用
     old_ids = EcsModel.objects.values_list('id', flat=True).all()
     old_ids = list(set(old_ids))
@@ -72,6 +73,7 @@ def sync_ecses():
     ecs_list = []
     # 每次使用都先使用默认的地域初始化，其实可以在类里增加默认值，但是没有增加默认值是为了更明确知道在干什么
     ali_cli = AliyunECS(key, secret, 'cn-beijing')
+
     for region in regions:
         region_id = region.get('instance_id')
         ali_cli.reset_region(region_id)

@@ -22,5 +22,6 @@ urlpatterns = [
         path('account/', include('account.urls')),
         path('component/',include('component.urls')),
         path('asset/',include('asset.urls')),
+        path('scheduler/', include('scheduler.urls')),
     }))
 ]

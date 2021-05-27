@@ -31,7 +31,7 @@ def get_region(obj_id, operator=None):
     data = obj.to_dict()
     return data
 
-def set_region_status(obj_id, status, operator):
+def set_region_status(obj_id, status, operator=None):
     '''
     设置地域状态
     '''

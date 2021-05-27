@@ -103,6 +103,10 @@
 
 ![](images/asset_create.png)
 
+#### 创建任务类型
+
+![](images/berry_type_create.png)
+
 ### 任务
 
 > 定时任务是通过celery的beat来完成的，这里写了一个示例，每10秒执行一次account.tasks.timer_hello_task.  

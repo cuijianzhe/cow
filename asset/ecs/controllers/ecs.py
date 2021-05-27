@@ -5,7 +5,8 @@ from base import controllers as base_ctl
 from base import errors
 from asset.manager.controllers import aliyun_key as aliyun_key_ctl
 from scheduler.controllers import berry as berry_ctl
-
+from asset.ecs.controllers import sync as ecs_sync
+from asset.manager.controllers import sync as regions_sync
 def get_ecses(keyword=None, page_num=None, page_size=None, operator=None):
     '''
     获取ECS列表
@@ -43,4 +44,8 @@ def sync_ecses(operator=None):
         'input_params': params,
         'operator': operator,
     }
-    berry_ctl.create_berry(**data)
+    # regions_sync.sync_zones()
+    print(data)
+    ecs_sync.sync_ecses()
+    print('123')
+    # berry_ctl.create_berry(**data)
