@@ -44,7 +44,8 @@ def sync_ecses(operator=None):
         'input_params': params,
         'operator': operator,
     }
-    # regions_sync.sync_zones()
+    # regions_sync.sync_zones()  #同步可用区
+    # regions_sync.sync_regions #同步地域
     print(data)
     ecs_sync.sync_ecses()
     print('123')

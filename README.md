@@ -107,6 +107,14 @@
 
 ![](images/berry_type_create.png)
 
+#### 同步任务怪谈
+
+因为异步任务暂时没搞定，就用接口去同步
+
+![](images/sync_happly.png)
+
+
+
 ### 任务
 
 > 定时任务是通过celery的beat来完成的，这里写了一个示例，每10秒执行一次account.tasks.timer_hello_task.  
