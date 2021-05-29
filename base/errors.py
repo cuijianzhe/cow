@@ -37,3 +37,7 @@ class LoginExpireError(BaseError):
 class CommonError(BaseError):
     errcode = 10010
     errmsg = '服务暂时不可用'
+
+class AliyunError(BaseError):
+    errcode = 10011
+    errmsg = '请求失败'

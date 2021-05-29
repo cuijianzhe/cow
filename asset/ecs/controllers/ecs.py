@@ -46,7 +46,5 @@ def sync_ecses(operator=None):
     }
     # regions_sync.sync_zones()  #同步可用区
     # regions_sync.sync_regions #同步地域
-    print(data)
-    ecs_sync.sync_ecses()
-    print('123')
-    # berry_ctl.create_berry(**data)
+    # ecs_sync.sync_ecses() #同步ecs
+    berry_ctl.create_berry(**data)

@@ -117,6 +117,10 @@
 
 ### 任务
 
+任务开启：
+
+`celery  -A cow worker -l info -n worker-hd1 -Q high_priority,default`
+
 > 定时任务是通过celery的beat来完成的，这里写了一个示例，每10秒执行一次account.tasks.timer_hello_task.  
 
 ------
