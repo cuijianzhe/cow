@@ -1,4 +1,3 @@
-
 `import random as R`
 
 
@@ -105,7 +104,17 @@
 
 #### 创建任务类型
 
+
+
 ![](images/berry_type_create.png)
+
+
+
+#### 获取slb实例信息
+
+![](images/list_slb.png)
+
+
 
 #### 同步任务怪谈
 
