@@ -114,6 +114,10 @@
 
 ![](images/list_slb.png)
 
+#### 获取域名解析列表
+
+![](images/list_domain_record.png)
+
 
 
 #### 同步任务怪谈
