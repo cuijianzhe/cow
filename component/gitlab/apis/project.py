@@ -12,3 +12,12 @@ class ListGitlabProjectApi(BaseApi):
         data = project_ctl.get_gitlab_projects(**params)
         return data
 
+
+class SyncGitlabProjectApi(BaseApi):
+    NEED_PERMISSION = False
+
+    need_params = {
+    }
+    def post(self, request, params):
+        project_ctl.sync_gitlab_projects(**params)
+

@@ -2,9 +2,10 @@ from django.db import transaction
 from django.db.models import Q
 
 from component.gitlab.models import GitlabProjectModel
-
+from scheduler.controllers import berry as berry_ctl
 from base import controllers as base_ctl
 from base import errors
+from component.gitlab.controllers import sync as gitlab_sync
 
 def get_gitlab_projects(keyword=None,page_num=None,page_size=None,operator=None):
     '''
@@ -26,3 +27,18 @@ def get_gitlab_projects(keyword=None,page_num=None,page_size=None,operator=None)
         'data_list':data_list,
     }
     return data
+
+
+def sync_gitlab_projects(operator=None):
+    '''
+    同步代码库
+    '''
+    params = {}
+    data = {
+        'name': '同步代码库',
+        'typ': 'sync_gitlab',
+        'input_params': params,
+        'operator':operator,
+    }
+
+    berry_ctl.create_berry(**data)

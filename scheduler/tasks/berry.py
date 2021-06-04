@@ -5,6 +5,7 @@ from scheduler.models import BerryModel
 from asset.ecs.controllers import sync as ecs_sync
 from asset.slb.controllers import sync as slb_sync
 from asset.domain.controllers import sync as domain_sync
+from component.gitlab.controllers import sync as gitlab_sync
 
 
 from base import controllers as base_ctl
@@ -52,6 +53,8 @@ def sync_task_route(berry_obj):
         slb_sync.sync_slbs()
     if berry_obj.typ.sign == 'sync_domain':
         domain_sync.sync_domains()
+    if berry_obj.typ.sign == 'sync_gitlab':
+        gitlab_sync.sync_gitlabs()
     else:
         raise errors.CommonError(f'任务{berry_obj.id}: 不存在的任务类型{berry_obj.typ.sign}')
     # 执行成功

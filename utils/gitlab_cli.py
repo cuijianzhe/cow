@@ -1,6 +1,6 @@
 import gitlab
-from gitlab.exceptions import GitlabGetError
-
+# from gitlab.exceptions import GitlabGetError
+from base import errors
 
 class GitlabCli:
 

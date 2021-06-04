@@ -118,6 +118,10 @@
 
 ![](images/list_domain_record.png)
 
+#### 获取gitlab项目
+
+![](images/list_gitlab_project.png)
+
 
 
 #### 同步任务怪谈

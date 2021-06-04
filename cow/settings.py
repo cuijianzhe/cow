@@ -167,9 +167,9 @@ CELERY_TASK_QUEUES = (
 )
 
 # 有关优先级队列启动问题
-# celery  -A rurality worker -l info -n worker-hd1 -Q high_priority,default
-# celery  -A rurality worker -l info -n worker-hd2 -Q high_priority,default
-# celery  -A rurality worker -l info -n worker-hl1 -Q high_priority,low_priority
+# celery  -A cow worker -l info -n worker-hd1 -Q high_priority,default
+# celery  -A cow worker -l info -n worker-hd2 -Q high_priority,default
+# celery  -A cow worker -l info -n worker-hl1 -Q high_priority,low_priority
 # 如果启动多个worker可以指定处理的队列，
 # 示例中三个worker都可以处理高优先级队列，两个可以处理default队列，只有一个处理低优先级队列
 
@@ -181,7 +181,7 @@ CELERY_TASK_ROUTES = {
 # hello_task.apply_async(queue='low_priority')
 
 # 定时任务，此命令只需要在一台机器上运行
-# celery -A rurality beat -l info
+# celery -A cow beat -l info
 CELERY_BEAT_SCHEDULE = {
     'timer_hello_task': {
         'task': 'account.tasks.timer_hello_task',
