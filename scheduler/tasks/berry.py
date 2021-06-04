@@ -6,7 +6,7 @@ from asset.ecs.controllers import sync as ecs_sync
 from asset.slb.controllers import sync as slb_sync
 from asset.domain.controllers import sync as domain_sync
 from component.gitlab.controllers import sync as gitlab_sync
-
+from asset.rds.controllers import sync as rds_sync
 
 from base import controllers as base_ctl
 from base import errors
@@ -55,6 +55,8 @@ def sync_task_route(berry_obj):
         domain_sync.sync_domains()
     if berry_obj.typ.sign == 'sync_gitlab':
         gitlab_sync.sync_gitlabs()
+    if berry_obj.typ.sign == 'sync_rds':
+        rds_sync.sync_rdses()
     else:
         raise errors.CommonError(f'任务{berry_obj.id}: 不存在的任务类型{berry_obj.typ.sign}')
     # 执行成功

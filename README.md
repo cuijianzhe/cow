@@ -122,6 +122,14 @@
 
 ![](images/list_gitlab_project.png)
 
+#### 获取RDS列表
+
+![](images/list_rds.png)
+
+#### 获取RDS账号列表
+
+![](images/list_rds_account.png)
+
 
 
 #### 同步任务怪谈

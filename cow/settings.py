@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'asset.ecs',
     'asset.slb',
     'asset.domain',
+    'asset.rds',
     'scheduler',
 
 ]
