@@ -130,6 +130,10 @@
 
 ![](images/list_rds_account.png)
 
+#### 获取redis账号信息
+
+![](images/list_redis_acount.png)
+
 
 
 #### 同步任务怪谈

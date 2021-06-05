@@ -9,7 +9,7 @@ from asset.manager.controllers import aliyun_key as aliyun_key_ctl
 from asset.manager.controllers import region as region_ctl
 from base import controllers as base_ctl
 from utils.time_utils import str2datetime_by_format
-from utils.aliyun.slb import AliyunSLB
+from utils.aliyun import AliyunSLB
 
 
 def format_slb_data(data):

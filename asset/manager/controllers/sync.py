@@ -5,7 +5,7 @@ from asset.manager.models import ZoneModel
 from asset.manager.controllers import aliyun_key as aliyun_key_ctl
 from base import controllers as base_ctl
 from base import errors
-from utils.aliyun.manager import AliyunManager
+from utils.aliyun import AliyunManager
 
 
 @transaction.atomic
