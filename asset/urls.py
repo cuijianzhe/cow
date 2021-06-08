@@ -4,11 +4,13 @@ from asset.slb import urls as slb_urls
 from asset.domain import urls as domain_urls
 from asset.rds import urls as rds_urls
 from asset.redis import urls as redis_urls
+from asset.polardb import urls as polardb_urls
 
 urlpatterns = manager_urls.urlpatterns +\
     ecs_urls.urlpatterns +\
     slb_urls.urlpatterns + \
     domain_urls.urlpatterns + \
     rds_urls.urlpatterns +\
-    redis_urls.urlpatterns
+    redis_urls.urlpatterns +\
+    polardb_urls.urlpatterns
 

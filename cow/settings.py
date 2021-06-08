@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'asset.domain',
     'asset.rds',
     'asset.redis',
+    'asset.polardb',
     'scheduler',
 
 ]

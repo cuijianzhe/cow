@@ -49,7 +49,6 @@ def sync_rdses():
     '''
     with transaction.atomic():
         key, secret = aliyun_key_ctl.get_enabled_aliyun_key()
-        print(key)
         regions = region_ctl.get_regions(status=RegionModel.ST_ENABLE)['data_list']
         # 记录原来已经创建过的RDS，用于之后删除已经不存在的使用
         old_ids = RdsModel.objects.values_list('id', flat=True).all()
