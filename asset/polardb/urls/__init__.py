@@ -1,4 +1,6 @@
-from asset.polardb.urls import polardb
+from asset.polardb.urls import polardb,database,account
 
 
-urlpatterns = polardb.urlpatterns
+urlpatterns = polardb.urlpatterns +\
+    database.urlpatterns +\
+    account.urlpatterns

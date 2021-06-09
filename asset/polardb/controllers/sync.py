@@ -185,3 +185,48 @@ def sync_polardb_databases():
         base_ctl.create_objs(PolarDBDatabaseModel, database_list)
         deleted_ids = list(set(set(old_ids) - set(existed_ids)))
         base_ctl.delete_objs(PolarDBDatabaseModel, deleted_ids)
+    sync_polardb_databases_accounts()
+
+def sync_polardb_databases_accounts():
+    '''
+    同步Database关联Account
+    '''
+    with transaction.atomic():
+        polardb_objs = PolarDBModel.objects.all()
+        old_ids = PolarDBAccountModel.objects.values_list('id', flat=True).all()
+        old_ids = list(set(old_ids))
+        existed_ids = []
+        related_list = []
+        for polardb_obj in polardb_objs:
+            # 一次取出同一个RDS下所有账号，并形成以username为key、id为value的字典
+            accounts = PolarDBAccountModel.objects.filter(polardb_id=polardb_obj.id).values_list('username', 'id').all()
+            all_account_dict = dict(accounts)
+            print(all_account_dict)
+
+            database_objs = PolarDBDatabaseModel.objects.filter(polardb_id=polardb_obj.id).all()
+            for database_obj in database_objs:
+                accounts = json.loads(database_obj.accounts)
+                for account in accounts:
+                    username = account.get('AccountName')
+                    print(username)
+                    privilege = account.get('AccountPrivilege')
+                    print(privilege)
+                    # 如果username不存在，则说明是同步之前加的就不在此次处理范围
+                    if username not in all_account_dict.keys():
+                        continue
+                    account_id = all_account_dict[username]
+                    query = {
+                        'database_id': database_obj.id,
+                        'account_id': account_id,
+                    }
+                    obj = PolarDBDatabaseAccountModel.objects.filter(**query).first()
+                    data = query
+                    data['privilege'] = privilege
+                    if not obj:
+                        related_list.append(data)
+                    else:
+                        base_ctl.update_obj(PolarDBDatabaseAccountModel, obj.id, data)
+                        existed_ids.append(obj.id)
+        base_ctl.create_objs(PolarDBDatabaseAccountModel, related_list)
+        deleted_ids = list(set(set(old_ids) - set(existed_ids)))
+        base_ctl.delete_objs(PolarDBDatabaseAccountModel, deleted_ids)

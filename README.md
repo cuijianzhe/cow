@@ -134,6 +134,10 @@
 
 ![](images/list_redis_acount.png)
 
+#### 获取polardb数据
+
+![](images/get_polardb.png)
+
 
 
 #### 同步任务怪谈
@@ -156,8 +160,8 @@
 > account/tasks.py:  
 > 这里就写了两个demo任务，可以通过以下步骤来尝试.  
 > * 首先确保安装了rabbitmq，并且正确的配置了celery.  
-> * 执行```celery  -A rurality worker -l info -n worker-hd1 -Q high_priority,default```  
-> * 执行```celery -A rurality beat -l info```  
+> * 执行```celery  -A cow worker -l info -n worker-hd1 -Q high_priority,default```  
+> * 执行```celery -A cow beat -l info```  
 > * 进入```python manage.py shell```  
 * 执行```from account.tasks import hello_task```
 * 执行```hello_task.delay()```  

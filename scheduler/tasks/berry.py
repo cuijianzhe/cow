@@ -8,6 +8,7 @@ from asset.domain.controllers import sync as domain_sync
 from component.gitlab.controllers import sync as gitlab_sync
 from asset.rds.controllers import sync as rds_sync
 from asset.redis.controllers import sync as redis_sync
+from asset.polardb.controllers import sync as polardb_sync
 
 from base import controllers as base_ctl
 from base import errors
@@ -60,6 +61,9 @@ def sync_task_route(berry_obj):
         rds_sync.sync_rdses()
     if berry_obj.typ.sign == 'sync_redis':
         redis_sync.sync_redises()
+    if berry_obj.typ.sign == 'sync_polardb':
+        polardb_sync.sync_polardbs()
+
     else:
         raise errors.CommonError(f'任务{berry_obj.id}: 不存在的任务类型{berry_obj.typ.sign}')
     # 执行成功
