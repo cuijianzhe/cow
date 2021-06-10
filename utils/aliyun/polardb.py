@@ -10,7 +10,7 @@ from .base import AliyunCli
 
 class AliyunPolarDB(AliyunCli):
     '''
-    阿里云RDS
+    阿里云PolarDB
     '''
     def get_polardbs(self, page_num=1, page_size=20):
         request = DescribeDBClustersRequest()
@@ -29,7 +29,7 @@ class AliyunPolarDB(AliyunCli):
         return data
     def get_polardb_accounts(self, instance_id, username=None, page_num=1, page_size=20):
         '''
-        获取RDS下账号
+        获取PolarDB下账号
         '''
         request = DescribeAccountsRequest()
         request.set_accept_format('json')
