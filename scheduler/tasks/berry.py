@@ -26,7 +26,7 @@ def apply_task(berry_id):
 
         sync_list = ['sync_ecs', 'sync_slb', 'sync_rds', 'sync_redis',
                      'sync_mongo', 'sync_rocket', 'sync_domain', 'sync_gitlab',
-                     'sync_jenkins', 'sync_ldap_user']
+                     'sync_jenkins', 'sync_ldap_user','sync_polardb']
         # 如果是同步任务，则走此处理方式
         if berry_obj.typ.sign in sync_list:
             sync_task_route(berry_obj)

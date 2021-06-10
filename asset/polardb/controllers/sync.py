@@ -201,16 +201,12 @@ def sync_polardb_databases_accounts():
             # 一次取出同一个RDS下所有账号，并形成以username为key、id为value的字典
             accounts = PolarDBAccountModel.objects.filter(polardb_id=polardb_obj.id).values_list('username', 'id').all()
             all_account_dict = dict(accounts)
-            print(all_account_dict)
-
             database_objs = PolarDBDatabaseModel.objects.filter(polardb_id=polardb_obj.id).all()
             for database_obj in database_objs:
                 accounts = json.loads(database_obj.accounts)
                 for account in accounts:
                     username = account.get('AccountName')
-                    print(username)
                     privilege = account.get('AccountPrivilege')
-                    print(privilege)
                     # 如果username不存在，则说明是同步之前加的就不在此次处理范围
                     if username not in all_account_dict.keys():
                         continue
