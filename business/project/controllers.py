@@ -128,7 +128,7 @@ def get_project_users(obj_id, typ=None, page_num=None, page_size=None, operator=
         .filter(user__is_deleted=False).select_related('user')
     if typ:
         base_query.filter(typ=typ)
-    total = base_query.count
+    total = base_query.count()
     objs = base_ctl.query_objs_by_page(base_query,page_num,page_size)
     data_list = []
     for obj in objs:
