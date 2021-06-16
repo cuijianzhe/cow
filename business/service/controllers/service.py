@@ -225,7 +225,6 @@ def get_service_users(obj_id, typ=None, page_num=None, page_size=None, operator=
     return data
 
 
-@onlyone.lock(ServiceEnvironmentModel.model_sign, 'obj_id:environment_id', 'obj_id:environment_id', 30)
 def create_service_environment(obj_id, environment_id, operator=None):
     '''
     创建服务关联环境

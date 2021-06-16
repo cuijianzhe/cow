@@ -152,11 +152,13 @@ class ServiceAssetObjModel(BaseModel):
     TYP_ROCKET_TOPIC = 'rocket_topic'
     TYP_KAFKA = 'kafka'
     TYP_DOMAIN = 'domain'
+    TYP_POLARDB = 'polardb'
 
     TYP_CHOICES = (
         (TYP_ECS, 'ECS'),
         (TYP_RDS, 'RDS'),
         (TYP_DATABASE, '数据库'),
+        (TYP_POLARDB, 'Polardb数据库'),
         (TYP_SLB, 'SLB'),
         (TYP_SLB_SERVER_GROUP, 'SLB服务器组'),
         (TYP_DNS, 'DNS'),
