@@ -2,31 +2,31 @@ from base.api import BaseApi
 from business.service.controllers import asset_obj as asset_obj_ctl
 
 
-class CreateServiceEcsApi(BaseApi):
+class CreateServiceServerGroupApi(BaseApi):
 
     need_params = {
         'obj_id': ('服务ID', 'required int'),
         'environment_id': ('环境ID', 'required int'),
         'typ': ('资产类型', 'required str'),
-        'asset_obj_id': ('ECS ID', 'required int'),
+        'asset_obj_id': ('服务器组ID', 'required int'),
     }
     def post(self, request, params):
         asset_obj_ctl.create_service_asset_obj(**params)
 
 
-class DeleteServiceEcsApi(BaseApi):
+class DeleteServiceServerGroupApi(BaseApi):
 
     need_params = {
         'obj_id': ('服务ID', 'required int'),
         'environment_id': ('环境ID', 'required int'),
         'typ': ('资产类型', 'required str'),
-        'asset_obj_id': ('ECS ID', 'required int'),
+        'asset_obj_id': ('服务器组ID', 'required int'),
     }
     def post(self, request, params):
         asset_obj_ctl.delete_service_asset_obj(**params)
 
 
-class ListServiceEcsApi(BaseApi):
+class ListServiceServerGroupApi(BaseApi):
     NEED_PERMISSION = False
 
     need_params = {

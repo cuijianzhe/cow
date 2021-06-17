@@ -14,7 +14,6 @@ from asset.polardb.models import PolarDBModel
 from business.service.controllers import ecs as ecs_ctl
 
 
-
 def is_existed_asset_obj(typ, asset_obj_id):
     '''
     判断资产实例是否存在
@@ -68,7 +67,6 @@ def create_service_asset_obj(obj_id, environment_id, typ, asset_obj_id, operator
     #TODO 五：调用异步任务完成添加的具体操作
     data = obj.to_dict()
     return data
-
 
 
 def delete_service_asset_obj(obj_id, environment_id, typ, asset_obj_id, operator=None):
