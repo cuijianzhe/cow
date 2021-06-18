@@ -148,6 +148,20 @@
 
 ![](images/get_database_service_list.png)
 
+#### 获取服务关联database
+
+![](images/get_service_database.png)
+
+#### 获取服务关联slb服务组
+
+
+
+![](images/list_service_server_group.png)
+
+#### 获取服务关联polardb 数据库
+
+![](images/get_service_polardb.png)
+
 
 
 #### 同步任务怪谈

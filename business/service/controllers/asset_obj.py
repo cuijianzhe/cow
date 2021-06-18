@@ -10,9 +10,13 @@ from asset.slb.models import SlbServerGroupModel
 from asset.rds.models import RdsDatabaseModel
 from asset.redis.models import RedisModel
 from asset.domain.models import DomainRecordModel
-from asset.polardb.models import PolarDBModel
+from asset.polardb.models import PolarDBDatabaseModel
 from business.service.controllers import ecs as ecs_ctl
-
+from business.service.controllers import database as database_ctl
+from business.service.controllers import server_group as server_group_ctl
+from business.service.controllers import redis as redis_ctl
+from business.service.controllers import domain as domain_ctl
+from business.service.controllers import polardb as polardb_ctl
 
 def is_existed_asset_obj(typ, asset_obj_id):
     '''
@@ -29,8 +33,7 @@ def is_existed_asset_obj(typ, asset_obj_id):
     elif typ == ServiceAssetObjModel.TYP_DOMAIN:
         return DomainRecordModel.objects.filter(id=asset_obj_id).exists()
     elif typ == ServiceAssetObjModel.TYP_POLARDB:
-        return PolarDBModel.objects.filter(id=asset_obj_id).exists()
-
+        return PolarDBDatabaseModel.objects.filter(id=asset_obj_id).exists()
     return False
 
 
@@ -131,7 +134,16 @@ def get_service_asset_objs(obj_id, environment_id, typ, page_num=None, page_size
     }
     if typ == ServiceAssetObjModel.TYP_ECS:
         data = ecs_ctl.get_service_ecses(**query)
-
+    if typ == ServiceAssetObjModel.TYP_DATABASE:
+        data = database_ctl.get_service_databases(**query)
+    if typ == ServiceAssetObjModel.TYP_SLB_SERVER_GROUP:
+        data = server_group_ctl.get_service_server_groups(**query)
+    if typ == ServiceAssetObjModel.TYP_REDIS:
+        data = redis_ctl.get_service_redises(**query)
+    if typ == ServiceAssetObjModel.TYP_DOMAIN:
+        data = domain_ctl.get_service_domains(**query)
+    if typ == ServiceAssetObjModel.TYP_POLARDB:
+        data = polardb_ctl.get_service_polardb(**query)
     return data
 
 
