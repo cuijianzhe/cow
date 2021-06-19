@@ -1,6 +1,7 @@
 from base.api import BaseApi
 from account.controllers import role as role_ctl
 
+
 class CreateRoleApi(BaseApi):
     '''
     创建角色
@@ -45,13 +46,7 @@ class ListRoleApi(BaseApi):
     def get(self,request,params):
         data = role_ctl.get_roles(**params)
         return data
-def get_role(obj_id, operator=None):
-    '''
-    获取角色信息
-    '''
-    obj = base_ctl.get_obj(RoleModel, obj_id)
-    data = obj.to_dict()
-    return data
+
 
 class CreateRoleUserApi(BaseApi):
     '''

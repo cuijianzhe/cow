@@ -5,7 +5,7 @@ from base import errors
 from base import controllers as base_ctl
 from account.models import RoleModel
 from account.models import RoleUserModel
-from account.models import RoleModModel,RolePermissionModel,PermissionModel
+from account.models import RoleModModel,RolePermissionModel,PermissionModel,ModModel
 
 def create_role(name,sign,operator=None):
     obj = RoleModel.objects.filter(name=name).first()
@@ -139,7 +139,7 @@ def create_role_mod(role_id,mod_id,operator):
     data = obj.to_dict()
     return data
 
-def delete_role_mod(role_id,mod_id,perator):
+def delete_role_mod(role_id,mod_id,operator):
     '''
     删除角色关联模块
     '''
@@ -195,8 +195,9 @@ def get_role_ids_by_user_id(user_id,operator=None):
     '''
     根据用户id获取角色列表
     '''
-    role_ids = RoleUserModel.objects.filter(user_id=user_id) \
-        .value_list('role_id', flat=True).all()
+
+    role_ids = RoleUserModel.objects.filter(user_id=user_id)\
+            .values_list('role_id', flat=True).all()
     return list(set(role_ids))
 
 def get_mods_by_user_id(user_id, operator=None):
@@ -215,7 +216,7 @@ def get_permissions_by_user_id(user_id, operator=None):
     role_ids = get_role_ids_by_user_id(user_id)
     permission_ids = RolePermissionModel.objects.filter(role_id__in=role_ids)\
             .values_list('permission_id', flat=True).all()
-    permissions =  PermissionModel.objects.filter(id__in=permission_ids).all()
+    permissions = PermissionModel.objects.filter(id__in=permission_ids).all()
     return permissions
 
 def set_role_permission(obj_id, permission_id, status, operator=None):

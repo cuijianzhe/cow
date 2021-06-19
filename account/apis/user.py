@@ -80,7 +80,10 @@ class CurrentUserApi(BaseApi):
 
     }
     def get(self, request, params):
-        params['obj_id'] = request.user_id
+        # params['obj_id'] = request.user_id
+        params = {
+            'obj_id':1
+        }
         data = user_ctl.get_user_info(**params)
         return data
 
